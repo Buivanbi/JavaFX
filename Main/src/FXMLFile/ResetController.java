@@ -68,6 +68,10 @@ public class ResetController implements Initializable {
     private Button btnClose3;
     @FXML
     private BorderPane bpForgotPassword;
+    @FXML
+    private Button btnPassWord1;
+    @FXML
+    private Button btnPassWord2;
 
     /**
      * Initializes the controller class.
@@ -116,10 +120,23 @@ public class ResetController implements Initializable {
             }
         }
         if (event.getSource() == btnSubmit) {
-            if (Pattern.matches(tfPassWord1.getText(), tfPassWord2.getText())) {
+            if (!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", tfPassWord1.getText())) {
+                alert("Password must contain at least 1 digit [0-9],\n"
+                        + "One lowercase [a-z],"
+                        + "One uppercase [A-Z],\n"
+                        + "One special character like !@#.\n"
+                        + "8-20 characters");
+            } else if (!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", tfPassWord2.getText())) {
+                alert("Confirm Password must contain at least 1 digit [0-9],\n"
+                        + "One lowercase [a-z],"
+                        + "One uppercase [A-Z],\n"
+                        + "One special character like !@#.\n"
+                        + "8-20 characters");
+            } else if (Pattern.matches(tfPassWord1.getText(), tfPassWord2.getText())) {
                 insert("update Account set accountPassWord='" + tfPassWord1.getText() + "' where accountUserName='" + tfUserName.getText() + "'");
                 alertSuccess("Change Password Suscessfully");
-
+                Stage stage = (Stage) bpForgotPassword.getScene().getWindow();
+                stage.close();
             } else {
                 alert("Password not same");
             }
@@ -198,10 +215,40 @@ public class ResetController implements Initializable {
             if (rs.next()) {
                 String userName = rs.getString("customerUserName");
                 tfUserName.setText(userName);
-            } 
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private String password1;
+    private String password2;
+
+    @FXML
+    private void showPassword1() {
+        password1 = tfPassWord1.getText();
+        tfPassWord1.clear();
+        tfPassWord1.setPromptText(password1);
+    }
+
+    @FXML
+    private void hidePassword1() {
+        password1 = tfPassWord1.getPromptText();
+        tfPassWord1.setText(password1);
+        tfPassWord1.setPromptText("Password");
+    }
+
+    @FXML
+    private void showPassword2() {
+        password2 = tfPassWord2.getText();
+        tfPassWord2.clear();
+        tfPassWord2.setPromptText(password2);
+    }
+
+    @FXML
+    private void hidePassword2() {
+        password2 = tfPassWord2.getPromptText();
+        tfPassWord2.setText(password2);
+        tfPassWord2.setPromptText("Enter your Password again");
     }
 
     private void alert(String mess) {

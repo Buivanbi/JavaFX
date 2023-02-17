@@ -126,7 +126,7 @@
                               <Label text="Quantity" />
                               <Spinner fx:id="snOrderDishQuantity" />
                               <Label text="Description" />
-                              <TextArea fx:id="taOrderDishDescription" prefHeight="200.0" prefWidth="200.0" promptText="Information" />
+                              <TextArea fx:id="taOrderDishDescription" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Information" />
                               <Button id="button3" fx:id="btnOrderMenuAdd" mnemonicParsing="false" onMouseClicked="#handleMouseAction" text="Add" />
                            </children>
                         </VBox>
@@ -192,7 +192,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tvBill" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tvBill" prefHeight="554.0" prefWidth="622.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="colBillDishName" prefWidth="75.0" text="DishName" />
                             <TableColumn fx:id="colBillDishQuantity" prefWidth="104.6667251586914" text="DishQuantity" />
@@ -205,7 +205,7 @@
                         </TableView>
                      </center>
                      <right>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="554.0" prefWidth="140.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="ChooseTable" />
                               <ComboBox fx:id="cbBillTable" onMouseClicked="#handleMouseAction" prefWidth="150.0" promptText="Input Table" />
@@ -404,7 +404,7 @@
                         </TableView>
                      </center>
                      <right>
-                        <VBox prefHeight="571.0" prefWidth="117.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="571.0" prefWidth="140.0" BorderPane.alignment="CENTER">
                            <children>
                               <ImageView fx:id="imgStaffImage" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true">
                                  <image>
@@ -516,7 +516,7 @@
                         </TableView>
                      </center>
                      <right>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="200.0" prefWidth="140.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="ID" />
                               <Label fx:id="lbCodeID" />
@@ -563,7 +563,7 @@
                         </HBox>
                      </bottom>
                      <right>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="Catalogies" />
                               <ComboBox fx:id="cbReceiptCatalog" prefWidth="150.0" promptText="Input Catalogies" />
@@ -607,7 +607,7 @@
                         </HBox>
                      </bottom>
                      <right>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="Catalogies" />
                               <ComboBox fx:id="cbPaymentCatalog" prefWidth="150.0" promptText="Input Catalogies" />
@@ -659,12 +659,12 @@
                         </TableView>
                      </center>
                      <right>
-                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="ID" />
                               <Label fx:id="lbAccountID" />
                               <Label text="Username" />
-                              <TextField fx:id="tfAccountUsername" editable="false" promptText="Input UserName" />
+                              <TextField fx:id="tfAccountUsername" promptText="Input UserName" />
                               <Label layoutX="10.0" layoutY="10.0" text="Password" />
                               <TextField fx:id="tfAccountPassword" layoutX="10.0" layoutY="27.0" promptText="Input Password" />
                               <Label text="Role" />

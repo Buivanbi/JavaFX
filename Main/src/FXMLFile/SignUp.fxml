@@ -8,7 +8,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -163,9 +162,9 @@
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="47.0" prefWidth="319.0">
+                  <VBox alignment="CENTER" prefHeight="47.0" prefWidth="321.0">
                      <children>
-                        <PasswordField fx:id="tfSignUpPassWord1" prefHeight="26.0" prefWidth="307.0" promptText="Password" />
+                        <PasswordField fx:id="tfSignUpPassWord1" prefHeight="26.0" prefWidth="321.0" promptText="Password" />
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -191,7 +190,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="47.0" prefWidth="322.0">
                      <children>
-                        <PasswordField fx:id="tfSignUpPassWord2" prefHeight="26.0" prefWidth="369.0" promptText="Enter your Password again" />
+                        <PasswordField fx:id="tfSignUpPassWord2" prefHeight="26.0" prefWidth="307.0" promptText="Enter Password Again" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="47.0" prefWidth="0.0">
@@ -216,11 +215,8 @@
          <children>
             <VBox id="background" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="200.0" spacing="40.0">
                <children>
-                  <ImageView fx:id="imgCustomer" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../image/Member/Anymouse.jpg" />
-                     </image></ImageView>
-                  <Button id="button1" fx:id="btnImageBrowser" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefWidth="122.0" stylesheets="@../main/application.css" text="Browser Image" />
+                  <ImageView fx:id="imgCustomer" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" />
+                  <Button id="button1" fx:id="btnImageBrowser" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefWidth="108.0" stylesheets="@../main/application.css" text="Browser Image" />
                </children>
             </VBox>
          </children>

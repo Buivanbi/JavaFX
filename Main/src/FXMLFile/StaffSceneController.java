@@ -831,7 +831,7 @@ public class StaffSceneController implements Initializable {
                 alert("Please fill Account role");
             } else {
                 if (alertConFirm("Are you want to update account?") == true) {
-                    update("update Account set accountUserName=N'" + tfAccountUsername.getText() + "',accountPassWord=" + tfAccountPassword.getText() + ",accountRole=N'" + cbAccountRole.getValue() + "' where accountID=" + Integer.valueOf(lbAccountID.getText()) + "");
+                    update("update Account set accountUserName=N'" + tfAccountUsername.getText() + "',accountPassWord=N'" + tfAccountPassword.getText() + "',accountRole=N'" + cbAccountRole.getValue() + "' where accountID=" + Integer.valueOf(lbAccountID.getText()) + "");
                     showAccountDB();
                     clearAccount();
                     log("" + lbUser.getText() + " have update account!");
@@ -1439,11 +1439,13 @@ public class StaffSceneController implements Initializable {
             modalBoxRemoveProduct("/FXMLFile/AddProductScene.fxml", "Remove Product");
         }
         if (event.getSource() == btnRefresh) {
+            showReceiptDB();
             showPaymentDB();
             totalPayment();
             totalReceipt();
             showOrderMiniDB();
             showOrderMenuDB();
+            showAccountDB();
             showMenuDB();
             showInventoryDB();
             createChart();
@@ -1460,14 +1462,16 @@ public class StaffSceneController implements Initializable {
             if (checkDayReport() == true) {
                 alert("Please Check out all table");
             } else {
-                insert("insert into EOD values(1,'" + lbTime.getText() + "'," + lbTotalReceipt.getText() + "," + lbTotalPayment.getText() + ")");
-                insert("insert into EODDetailThu(brandID,eodDetailThuID,eodDetailThuTime,eoddetailThuCatalog,eoddetailThuPrice,eoddetailThuNote) select 1,thuID,Thu.thuDate,Thu.thuCatalog,Thu.thuPrice,Thu.thuNote from Thu");
-                insert("insert into EODDetailChi(brandID,eodDetailChiID,eodDetailChiTime,eoddetailChiCatalog,eoddetailChiPrice,eoddetailChiNote) select 1,chiID,Chi.chiDate,Chi.chiCatalog,Chi.chiPrice,Chi.chiNote from Chi");
-                delete("delete from table Thu");
-                delete("delete from table Chi");
-                showReceiptDB();
-                showPaymentDB();
-                modalBoxEOD("/FXMLFile/EOD.fxml", "EOD");
+                if (alertConFirm("Are you want to EOD today?") == true) {
+                    insert("insert into EOD values(1,'" + lbTime.getText() + "'," + lbTotalReceipt.getText() + "," + lbTotalPayment.getText() + ")");
+                    insert("insert into EODDetailThu(brandID,eodDetailThuID,eodDetailThuTime,eoddetailThuCatalog,eoddetailThuPrice,eoddetailThuNote) select 1,thuID,Thu.thuDate,Thu.thuCatalog,Thu.thuPrice,Thu.thuNote from Thu");
+                    insert("insert into EODDetailChi(brandID,eodDetailChiID,eodDetailChiTime,eoddetailChiCatalog,eoddetailChiPrice,eoddetailChiNote) select 1,chiID,Chi.chiDate,Chi.chiCatalog,Chi.chiPrice,Chi.chiNote from Chi");
+                    delete("delete from Thu");
+                    delete("delete from Chi");
+                    showReceiptDB();
+                    showPaymentDB();
+                    modalBoxEOD("/FXMLFile/EOD.fxml", "EOD");
+                }
             }
         }
         if (event.getSource() == btnShowReport) {
@@ -2303,7 +2307,7 @@ public class StaffSceneController implements Initializable {
                 int codeQty = rs.getInt("codeQuantity");
                 if (codeQty == 1) {
                     delete("delete from codeDiscount where codeValue='" + tfBillDiscount.getText() + "'");
-                    log(""+tfBillDiscount.getText()+"has been expires");
+                    log("" + tfBillDiscount.getText() + "has been expires");
                 }
             }
             //close?

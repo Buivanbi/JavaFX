@@ -165,7 +165,7 @@ create table [Order](
   dishPrice int,
   dishQuantity int,
   dishCatalogies varchar(30),
-  orderNote nvarchar(225)
+  orderNote varchar(225)
 );
 go
 

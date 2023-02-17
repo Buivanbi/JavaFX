@@ -28,6 +28,8 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import jdbcDAO.InventoryDB;
 import org.apache.log4j.Logger;
 
@@ -37,7 +39,7 @@ import org.apache.log4j.Logger;
  * @author Admin
  */
 public class AddProductSceneController implements Initializable {
-    
+
     @FXML
     public TextField tfProductName;
     @FXML
@@ -58,6 +60,8 @@ public class AddProductSceneController implements Initializable {
     public Label lbMax;
     @FXML
     public Label lbPrice;
+    @FXML
+    private VBox vbAddRemove;
 
     /**
      * Initializes the controller class.
@@ -67,21 +71,21 @@ public class AddProductSceneController implements Initializable {
         snProductQOH.setValueFactory(productSpinner);
         Timenow();
     }
-    
+
     private static final SpinnerValueFactory<Integer> productSpinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 1, 1);
-    
+
     public void setName(String name) {
         tfProductName.setText(name);
     }
-    
+
     public void setTitle(String name) {
         lbTitle.setText(name);
     }
-    
+
     public void setStaff(String name) {
         lbStaff.setText(name);
     }
-    
+
     public static Connection getConnect() {
         Connection cn = null;
         String url = "jdbc:sqlserver://127.0.0.1:1433;database=Project";
@@ -97,7 +101,7 @@ public class AddProductSceneController implements Initializable {
         }
         return cn;
     }
-    
+
     private void executeQuery(String sql) {
         Connection cn = getConnect();
         java.sql.Statement st;
@@ -108,22 +112,22 @@ public class AddProductSceneController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     private void update(String query) {
         String sql = query;
         executeQuery(sql);
     }
-    
+
     private void log(String mess) {
         Logger.getLogger(AddProductSceneController.class.getName()).info(mess);
     }
-    
+
     private void alertSuccess(String mess) {
         Alert alert = new Alert(Alert.AlertType.NONE, mess, ButtonType.OK);
         alert.setTitle("Notification!");
         Optional<ButtonType> result = alert.showAndWait();
     }
-    
+
     private void Timenow() {
         Thread thread = new Thread(() -> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -149,17 +153,17 @@ public class AddProductSceneController implements Initializable {
         textInput.getDialogPane().setContentText(mess);
         Optional<String> result = textInput.showAndWait();
         javafx.scene.control.TextField input = textInput.getEditor();
-        
+
         final Button ok = (Button) textInput.getDialogPane().lookupButton(ButtonType.OK);
         ok.addEventFilter(ActionEvent.ACTION, event
                 -> System.out.println("OK was definitely pressed")
         );
-        
+
         final Button cancel = (Button) textInput.getDialogPane().lookupButton(ButtonType.CANCEL);
         cancel.addEventFilter(ActionEvent.ACTION, event
                 -> System.out.println("Cancel was definitely pressed")
         );
-        
+
         if (input.getText() != null && input.getText().toString().length() != 0) {
             if (result.isPresent()) {
                 Logger.getLogger(StaffSceneController.class.getName()).info(reason + input.getText());
@@ -172,12 +176,12 @@ public class AddProductSceneController implements Initializable {
             return false;
         }
     }
-    
+
     private void alert(String mess) {
         Alert alert = new Alert(Alert.AlertType.WARNING, mess, ButtonType.OK);
         Optional<ButtonType> result = alert.showAndWait();
     }
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnProductAdd) {
@@ -189,6 +193,8 @@ public class AddProductSceneController implements Initializable {
                 update("update Menu set dishStatus='Available' where dishIngredient ='" + tfProductName.getText() + "'");
                 log("" + lbStaff.getText() + " have update inventory!");
                 alertSuccess("Add successfully");
+                Stage stage = (Stage) vbAddRemove.getScene().getWindow();
+                stage.close();
             }
         }
         if (event.getSource() == btnProductRemove) {
@@ -196,11 +202,15 @@ public class AddProductSceneController implements Initializable {
                 if (textDialog("Confirm", "Reason", "" + lbStaff.getText() + " have delete " + tfProductName.getText() + " product for ") == true) {
                     update("delete from Inventory where productName='" + tfProductName.getText() + "'");
                     alertSuccess("Delete Successfully!");
+                    Stage stage = (Stage) vbAddRemove.getScene().getWindow();
+                    stage.close();
                 }
             } else {
                 if (textDialog("Confirm", "Reason", "" + lbStaff.getText() + " have delete " + tfProductName.getText() + " product for ") == true) {
                     update("UPDATE Inventory set productQOH-=" + snProductQOH.getValue() + " where productName='" + tfProductName.getText() + "'");
                     log("" + lbStaff.getText() + " have update inventory!");
+                    Stage stage = (Stage) vbAddRemove.getScene().getWindow();
+                    stage.close();
                     alertSuccess("Remove successfully");
                 }
             }

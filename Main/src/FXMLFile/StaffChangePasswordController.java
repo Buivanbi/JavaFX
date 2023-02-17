@@ -22,6 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -42,6 +44,8 @@ public class StaffChangePasswordController implements Initializable {
     private PasswordField tfConfirmPassword;
     @FXML
     private Button btnShowPass2;
+    @FXML
+    private VBox vbStaffChangePassword;
 
     /**
      * Initializes the controller class.
@@ -147,6 +151,8 @@ public class StaffChangePasswordController implements Initializable {
             } else {
                 update("update Account set accountPassWord='" + tfPassword.getText() + "' where accountUserName='" + lbStaffName.getText() + "'");
                 alertSuccess("Change Password Successfully!");
+                Stage stage = (Stage) vbStaffChangePassword.getScene().getWindow();
+                stage.close();
             }
         }
     }

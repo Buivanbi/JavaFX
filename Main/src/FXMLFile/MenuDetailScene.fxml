@@ -33,7 +33,7 @@
       </HBox>
    </center>
    <top>
-      <Label prefHeight="38.0" prefWidth="73.0" text="Menu Detail" BorderPane.alignment="CENTER" />
+      <Label prefHeight="38.0" prefWidth="86.0" text="Menu Detail" BorderPane.alignment="CENTER" />
    </top>
    <bottom>
       <Button id="button2" fx:id="btnClose" mnemonicParsing="false" onAction="#handleButtonAction" text="Close" BorderPane.alignment="CENTER" />
