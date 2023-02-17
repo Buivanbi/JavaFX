@@ -1254,10 +1254,10 @@ public class StaffSceneController implements Initializable {
             if (cbBillTable.getValue() == null) {
                 alert("Please choose table!");
             } else {
-                cbBillTable.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-                    showBillDB();
-                    totalBill();
-                });
+//                cbBillTable.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+//                    showBillDB();
+//                    totalBill();
+//                });
                 if (alertConFirm("Are you want to check out " + cbBillTable.getValue() + "?") == true) {
                     insert("insert into Thu values(1,N'" + lbTime.getText() + "',N'" + cbBillTable.getValue() + "'," + lbBillAfter.getText() + ",N'" + lbUser.getText() + " have check out." + taBillNote.getText() + "')");
                     delete("delete from [Order] where dishCatalogies=N'" + cbBillTable.getValue() + "'");
